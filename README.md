@@ -10,7 +10,9 @@ The primary goal of this project is to create a comprehensive campgrounds manage
 
 	•	Explore available campgrounds
 	•	View campground details
+ 	•	Create new campgrounds
 	•	Leave reviews or feedback
+ 	•	User account management, such as creation, login, and sign-out
 
 This project involves building both front-end and back-end components, along with database integration.
 
