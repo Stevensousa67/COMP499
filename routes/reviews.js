@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const Campground = require('../models/campground');
+const Review = require('../models/review');
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const { validateReview } = require('../utils/JOI-Validations.js');
-const Review = require('../models/review');
 const router = express.Router({ mergeParams: true });
 
 router.post('/', validateReview, catchAsync(async (req, res) => {
@@ -20,7 +20,7 @@ router.delete('/:reviewId', catchAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/campgrounds/${id}`);
+    res.redirect(`/campgrounds/`);
 }));
 
 module.exports = router;
