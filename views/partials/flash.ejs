@@ -1,8 +1,8 @@
 <% for (let type in messages) { %>
   <% messages[type].forEach(message => { %>
-    <div class="alert alert-<%= type %> alert-dismissible fade show" role="alert">
-        <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="alert alert-<%= type === 'error' ? 'danger' : type %> alert-dismissible fade show" role="alert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <strong><%= type.charAt(0).toUpperCase() + type.slice(1) %>!</strong> <%= message %>
     </div>
   <% }) %>
 <% } %>
