@@ -1,9 +1,12 @@
-require('dotenv').config({ path: '../.env' });
+const path = require('path'); // Import the path module
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Campground = require('../models/campground');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
+
+console.log(process.env.UNSPLASH_API_KEY);
 
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp');
