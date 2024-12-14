@@ -1,4 +1,4 @@
-const path = require('path'); // Import the path module
+const path = require('path'); 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const axios = require('axios');
 const mongoose = require('mongoose');
@@ -39,9 +39,14 @@ const seedDB = async () => {
             author: '674c9ef0347bdfd9c1287f96',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            image: randomPhoto.urls.regular,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quae.',
-            price: Math.floor(Math.random() * 20) + 10
+            price: Math.floor(Math.random() * 20) + 10,
+            images: [
+                {
+                    url: randomPhoto.urls.regular,
+                    filename: randomPhoto.id
+                }
+            ]
         });
 
         await camp.save();
