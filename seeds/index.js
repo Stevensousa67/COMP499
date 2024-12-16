@@ -25,19 +25,26 @@ const seedDB = async () => {
     const photosResponse = await axios.get('https://api.unsplash.com/collections/496276/photos', {
         params: {
             client_id: process.env.UNSPLASH_API_KEY,
-            per_page: 50 // Fetch 50 photos in a single request (adjust as necessary)
+            per_page: 300 // Fetch 50 photos in a single request (adjust as necessary)
         }
     });
 
     const photos = photosResponse.data;
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 300; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
 
         const camp = new Campground({
             author: '674c9ef0347bdfd9c1287f96',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
+            geometry: {
+                type: 'Point',
+                coordinates: [
+                    cities[random1000].longitude,
+                    cities[random1000].latitude
+                ]
+            },
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quae.',
             price: Math.floor(Math.random() * 20) + 10,
