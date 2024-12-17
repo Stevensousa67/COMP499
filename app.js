@@ -16,6 +16,7 @@ const userRoutes = require('./routes/users');
 const User = require('./models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp');
 const db = mongoose.connection;
@@ -33,11 +34,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 const sessionConfig = {
+    name: 'session',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        // secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -54,6 +57,7 @@ app.use((req, res, next) => {
     res.locals.messages = req.flash();
     next();
 });
+app.use(mongoSanitize());
 
 app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
