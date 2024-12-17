@@ -27,14 +27,3 @@ body {
     color: #fff;
     border-bottom-color: #fff;
 }
-
-.img-fluid {
-    height: 500px;
-    width: 100%;
-}
-
-#map {
-    height: 500px;
-    width: 100%;
-    margin: 0 auto;
-}

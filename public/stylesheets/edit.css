@@ -29,12 +29,6 @@ body {
 }
 
 .img-fluid {
-    height: 500px;
+    height: 300px;
     width: 100%;
-}
-
-#map {
-    height: 500px;
-    width: 100%;
-    margin: 0 auto;
 }
