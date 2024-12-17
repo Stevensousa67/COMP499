@@ -17,8 +17,12 @@ const User = require('./models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const mongoDBStore = require('connect-mongo');
+// const dbUrl = process.env.DB_URL
+const dbUrl = 'mongodb://localhost:27017/yelp-camp'
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -33,7 +37,17 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+const store = mongoDBStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+
 const sessionConfig = {
+    store,
     name: 'session',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
@@ -47,6 +61,8 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(mongoSanitize());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -57,7 +73,6 @@ app.use((req, res, next) => {
     res.locals.messages = req.flash();
     next();
 });
-app.use(mongoSanitize());
 
 app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
