@@ -2,25 +2,17 @@
 
 Live link: https://yelpcamp.stevensousa.com
 
-This repository contains the source code for my YelpCamp! project.
+# Description
 
-# Project Objective
+A full-stack Node.js/Express app with MongoDB Atlas, built to connect camping enthusiasts. Users can sign up via Passport auth, create campgrounds with Cloudinary-hosted images, and leave reviews. Integrated MapBox API for an interactive global map on the homepage and precise campground locations in detailed views.
 
-The goal of this project is to create a comprehensive campgrounds management system, which allows users to:
+# Tech Stack
 
-	•	Explore available campgrounds
-	•	View campground details
- 	•	Create new campgrounds
-	•	Leave reviews or feedback
- 	•	User account management, such as creation, login, and sign-out
-  
+Node.js, Express.js, MongoDB Atlas, Passport, Cloudinary, MapBox API, HTML/CSS/JavaScript
 
-This project is part of my effort to deepen my understanding of software engineering principles and practices, especially in web development.
+# Key Features
 
-# Technologies
-
-	•	Frontend: HTML, CSS, JavaScript
-	•	Backend: Node.JS, Express
-	•	Database: MongoDB, Cloudinary
-	•	Version Control: Git and GitHub
-	•	Other Tools: Bootstrap, MapBox
+- Secure user auth with Passport for account creation and login.
+- Campground management with image uploads via Cloudinary.
+- Review system for community engagement.
+- Dual MapBox integration: global overview and per-campground maps.
